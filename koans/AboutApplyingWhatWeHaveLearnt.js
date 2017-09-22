@@ -74,9 +74,19 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should count the ingredient occurrence (functional)", function () {
-    var ingredientCount = { "{ingredient name}": 0 };
 
+var ingredientCount = {};
+var ingredientsArray = [];
     /* chain() together map(), flatten() and reduce() */
+ products.map(function (x) { ingredientsArray.push(x.ingredients) })
+
+ _(ingredientsArray).chain().flatten().map(function (x) { ingredientCount[x] = 0})
+
+ _(ingredientsArray).chain().flatten().reduce(function (a ,i) {
+   a[i] = a[i] +1
+   return a;
+ }, ingredientCount)
+
 
     expect(ingredientCount['mushrooms']).toBe(2);
   });
